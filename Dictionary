@@ -1,0 +1,62 @@
+package lab2;
+import java.util.ArrayList;
+
+public class Dictionairy {
+private ArrayList<Word> thelist;
+private ArrayList<Word> backup = null;
+
+public Dictionairy() {}
+
+public String addString(String arg) {
+	Word w = new Word("empty", 0);
+	int counter = 0;
+	
+	for (int i = 0; i < thelist.size(); i++) {
+
+		if (thelist.get(i).getWord().compareTo(arg) == 0) {
+			counter = thelist.get(i).getCount();
+			Word s = new Word(arg, counter + 1);
+			w = s;
+		}
+		else {
+			Word s = new Word(arg, 1);
+			w = s;
+		}
+	}
+	
+	thelist.add(w);
+	return w.toString();
+}
+
+
+public String sortList(int arg) {
+	
+	int i, j;
+    for (i = 0; i < thelist.size() - 1; i++) {
+        for (j = 0; j < thelist.size() - i - 1; j++) {
+            if (thelist.get(j).compareTo(thelist.get(j+1)) > 0){
+            	
+            	// FIX THIS SHIT
+                /*
+            	Word temp;
+                temp = thelist[j + 1];
+                thelist[j + 1] = thelist[i];
+                thelist[i] = temp;
+                */
+            }
+        }
+    }
+}
+
+public String toString() {
+	
+	String s = "fuck";
+	//String s = "Content:\n" + 
+	
+	for (int i = 0; i < thelist.size(); i++) {
+		thelist.get(i);
+	}
+	return s;
+}
+
+}
