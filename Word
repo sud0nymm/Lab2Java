@@ -27,36 +27,34 @@ public class Word {
 		
 		if((arg == ORIGINAL) || (arg == BYNAME) || (arg == BYCOUNTS)) {
 			sortCriterion = arg;
-		}
-		
+		}	
 	}
 	
 	public int compareTo(Word arg) {
-		
+		int returnint = 0;
 		if (sortCriterion == ORIGINAL) {
-			
-			return 2;
+			returnint = 2;
 		}
 		else if(sortCriterion == BYCOUNTS) {
-			
 			if (count < arg.count) {
-				return -1;
+				returnint = -1;
 			}
 			else if(count == arg.count) {
-				return 0;
+				returnint = 0;
 			}
-			else {
-				return 1;
+			else if(count>arg.count){
+				returnint = 1;
 			}
 		}
 		else {
-			return theWord.compareTo(arg.theWord);
+			returnint = theWord.compareTo(arg.theWord);
 		}
+		return returnint;
 	}
 	
 	public String toString() {
 		
-		return String.format("Word: (10%s)	Count: (3%d)", theWord,count);
+		return String.format("Word: %10s	Count: %3d", theWord,count);
 	}
 	
 }
