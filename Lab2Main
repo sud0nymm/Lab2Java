@@ -1,15 +1,52 @@
 package lab2;
+import java.io.*;
+import java.util.Scanner;
 
 public class Lab2Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		
-		String s = "dickhead";
-		Word w = new Word(s, 4);
+		Scanner s = new Scanner(System.in);
 		
-		System.out.println(w);
-	
+		System.out.println("Type filename:");
+		String input = s.nextLine();	
+		File f = new File(input);
 		
+		while (f.exists() == false) {
+			System.out.println("Type filename:");
+			input = s.nextLine();
+			f = new File(input);
+			if (f.exists() == true) {
+				System.out.println("file exists");
+				s.close();
+				break;
+			}
+		}
+		
+		FileReader fr = new FileReader(input);
+		BufferedReader br = new BufferedReader(fr);
+		
+		Scanner scan = new Scanner(fr);
+		String s2 = new String("");
+		
+		while(scan.hasNext()) {
+			s2 += scan.nextLine() + " ";
+		}
+		scan.close();
+		
+		s2 = s2.trim();
+		s2 = s2.toLowerCase();
+		
+		String[] result = s2.split(" ");
+		Dictionairy dairy = new Dictionairy();
+		
+		for (int i = 0; i < result.length; i++) {
+			dairy.addString(result[i]);
+		}
+		
+		System.out.println(dairy);
+		//System.out.println("Sort list by 0: \n"+dairy.sortList(0));
 	}
-
 }
+
+
