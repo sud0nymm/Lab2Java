@@ -27,17 +27,20 @@ public class Lab2Main {
 		BufferedReader br = new BufferedReader(fr);
 		
 		Scanner scan = new Scanner(fr);
-		String s2 = new String("");
-		
-		while(scan.hasNext()) {
-			s2 += scan.nextLine() + " ";
+		StringBuilder s2 = new StringBuilder();
+
+		while (scan.hasNextLine()) {
+		    String line = scan.nextLine().trim(); 
+		    if (!line.isEmpty()) {
+		        s2.append(line).append(" ");
+		    }
 		}
+
 		scan.close();
+		String s3 = s2.toString().trim();
+		s3 = s3.toLowerCase();
 		
-		s2 = s2.trim();
-		s2 = s2.toLowerCase();
-		
-		String[] result = s2.split(" ");
+		String[] result = s3.split(" +");
 		Dictionairy dairy = new Dictionairy();
 		
 		for (int i = 0; i < result.length; i++) {
@@ -45,8 +48,10 @@ public class Lab2Main {
 		}
 		
 		System.out.println(dairy);
-		//System.out.println("Sort list by 0: \n"+dairy.sortList(0));
+		System.out.println(dairy.sortList(1) + dairy);
+		//System.out.println(dairy.sortList(2) + dairy);
+		//System.out.println(dairy.sortList(0) + dairy);
+
+		
 	}
 }
-
-
