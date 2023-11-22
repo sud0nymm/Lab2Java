@@ -12,22 +12,22 @@ public Dictionairy() {
 }
 
 public String addString(String arg) {
-	Word w = new Word(arg,1);
-	
-	for (int i = 0; i < thelist.size(); i++) {
+	Word w = null;
 
-		if (thelist.get(i).getWord().compareTo(arg) == 0) {
-			w = new Word(arg, thelist.get(i).getCount()+ 1);
-			break;
-		}
+	for (int i = 0; i < thelist.size(); i++) {
+	    if (thelist.get(i).getWord().equals(arg)) {
+	        w = thelist.get(i);
+	        w = new Word(arg, w.getCount() + 1);
+	    }
+	}
+	if (w == null) {
+	    w = new Word(arg, 1);
 	}
 	thelist.add(w);
 	return w.toString();
 }
 
-
 public String sortList(int arg) {
-	
 	String returner = new String();
 	
 	if (backup == null) {
@@ -37,40 +37,47 @@ public String sortList(int arg) {
 			Word w = new Word(thelist.get(i).getWord(), thelist.get(i).getCount());
 			backup.add(i, w);
 		}
-	}
+	}	
 	
 	if (arg == Word.ORIGINAL) {
+		Word.setCriterion(Word.ORIGINAL);
 		thelist = backup;
-		Word.setCriterion(0);
-		returner = ("Word list was reset");
+		returner = ("Word list was reset\n");
 	}
-	
-	
 	
 	if(arg == Word.BYCOUNTS || arg == Word.BYNAME) {
 		
 		Word.setCriterion(arg);
+		
 		//sorting stuff
-		int i, j;
-	    for (i = 0; i < thelist.size() - 1; i++) {
-	        for (j = 0; j < thelist.size() - i - 1; j++) {
-	            if (thelist.get(i).compareTo(thelist.get(i + 1)) > 0){
-	            	Word temp;
-	                temp = thelist.get(j + 1);
-	                thelist.add(j + 1, thelist.get(i));
-	                thelist.add(i, temp);
+	    boolean swapped;
+
+	    for (int i = 0; i < thelist.size() - 1; i++) {
+	        swapped = false;
+
+	        for (int j = 0; j < thelist.size() - i - 1; j++) {
+	            if (thelist.get(j).compareTo(thelist.get(j + 1)) > 0) {
+	                // swap 
+	                Word temp = thelist.get(j);
+	                thelist.set(j, thelist.get(j + 1));
+	                thelist.set(j + 1, temp);
+	                swapped = true;
 	            }
 	        }
+	        if (!swapped) {
+	            break;
+	        }
 	    }
-	}
+	}	
+	
 	if (arg == Word.BYCOUNTS){
-		returner = ("Sorted by counts");
+		returner = ("Sorted by counts\n");
 	}
 	else if (arg == Word.BYNAME){
-		returner = ("Sorted alphabetically");
+		returner = ("Sorted alphabetically\n");
 	}
-	else {
-		returner = ("Sort criterion unknown");
+	else if (arg != Word.ORIGINAL){
+		returner = ("Sort criterion unknown\n");
 	}
 	
     return returner;
