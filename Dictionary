@@ -18,12 +18,13 @@ public String addString(String arg) {
 	    if (thelist.get(i).getWord().equals(arg)) {
 	        w = thelist.get(i);
 	        w = new Word(arg, w.getCount() + 1);
+	        thelist.add(w);
 	    }
 	}
 	if (w == null) {
 	    w = new Word(arg, 1);
+	    thelist.add(w);
 	}
-	thelist.add(w);
 	return w.toString();
 }
 
