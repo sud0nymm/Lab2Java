@@ -18,7 +18,14 @@ public String addString(String arg) {
 	    if (thelist.get(i).getWord().equals(arg)) {
 	        w = thelist.get(i);
 	        w = new Word(arg, w.getCount() + 1);
-	        thelist.add(w);
+	        thelist.set(i,w);
+	    }
+	    
+	    try {
+	    	double d = Double.parseDouble(thelist.get(i).getWord());
+	    	thelist.remove(i);
+	    }catch(NumberFormatException ex){
+	    	;
 	    }
 	}
 	if (w == null) {
@@ -43,7 +50,7 @@ public String sortList(int arg) {
 	if (arg == Word.ORIGINAL) {
 		Word.setCriterion(Word.ORIGINAL);
 		thelist = backup;
-		returner = ("Word list was reset\n");
+		returner = ("Word list was reset)\n");
 	}
 	
 	if(arg == Word.BYCOUNTS || arg == Word.BYNAME) {
