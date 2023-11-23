@@ -13,12 +13,11 @@ public class Lab2Main {
 		File f = new File(input);
 		
 		while (f.exists() == false) {
-			System.out.println("Type filename:");
+			System.out.println("File not found!\ntype filename:");
 			input = s.nextLine();
 			f = new File(input);
 			if (f.exists() == true) {
 				System.out.println("file exists");
-				s.close();
 				break;
 			}
 		}
@@ -44,14 +43,30 @@ public class Lab2Main {
 		Dictionairy dairy = new Dictionairy();
 		
 		for (int i = 0; i < result.length; i++) {
-			dairy.addString(result[i]);
+			System.out.println(dairy.addString(result[i]));
 		}
+		System.out.println("\n");
 		
-		System.out.println(dairy);
-		System.out.println(dairy.sortList(1) + dairy);
-		//System.out.println(dairy.sortList(2) + dairy);
-		//System.out.println(dairy.sortList(0) + dairy);
-
+		//console input/output whatevah
+		System.out.println(dairy.sortList(2).toString()+dairy.toString());
+		System.out.println(dairy.sortList(1).toString()+dairy.toString());
+		System.out.println(dairy.sortList(0).toString()+dairy.toString());
 		
+		
+		//creating file
+		System.out.println("Type filename:");
+		String filename = s.nextLine();
+		File r = new File(filename); r.createNewFile();
+		if (r.exists()==true) {
+			System.out.println("file successfully created");
+		}
+		s.close();
+		
+		//output to file
+		Writer w2 = new BufferedWriter(new FileWriter(r, false));
+		w2.write(dairy.sortList(0)+dairy.toString()+"\r\n"); 
+		w2.close();
 	}
 }
+
+
